@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas en eventos de linea</title>
+    <style>
+    #canvas1{
+        background-color: rgb(58, 62, 62,.3);
+        border: 1px solid black;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas1");
+
+        if(canvas && canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            if(ctx){
+              ctx.font = "100px Verdana";
+              ctx.lineWitdh = 1.0;
+              ctx.fillStyle = "rgb(20, 173, 134)"; // lleno en adetro
+              ctx.strokeStyle = "black"; // relleno de contorno
+              //Definimos el contexto
+              ctx.shadowColor = "black"; // contorno
+              ctx.shadowOffsetX = -1; // en x
+              ctx.shadowOffsetY =15; // en y
+              ctx.shadowBlur = 10; // blur en el contorno de desvanecimiento
+
+
+              // TEXTO QUE LLEVA EL CUADRO
+              ctx.fillText("VAR",10,150); //relleno
+              ctx.strokeText("VAR",10,150); //contorno
+
+
+            }
+    }
+  }
+    </script>
+</head>
+<body>
+    <h1>Manejo de texto usando canvas </h1>
+    <canvas id="canvas1" width="300px" height="300px">Tu navegador tiene canvas</canvas>
+</body>
+</html>

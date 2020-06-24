@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas en eventos de linea</title>
+    <style>
+    #canvas1{
+        background-color: bisque;
+        border: 1px solid black;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas1");
+        var bandera = false;
+        if(canvas && canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            var pos = {};
+            if(ctx){
+                function ajusta(xx,yy){
+                    var posCanvas = canvas.getBoundingClientRect();
+                    var x = xx - posCanvas.left;
+                    var y = yy - posCanvas.top;
+                    return {x:x, y:y}
+                }
+                function dibuja(inicio, fin){
+                    ctx.beginPath();
+                    ctx.strokeStyle = "black";
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(inicio.x, inicio.y);
+                    ctx.lineTo(fin.x, fin.y);
+                    ctx.stroke();
+                }
+                canvas.onmousedown = function(e){
+                    pos = ajusta(e.clientX, e.clientY);
+                    bandera = true;
+                }
+                canvas.onmouseup = function(e){
+                    bandera = false;
+                }
+                canvas.onmousemove = function(e){
+                    if(bandera){
+                        var fin = ajusta(e.clientX, e.clientY);
+                        dibuja(pos, fin);
+                        
+                        //SI QUEREMOS DIBUJAR A NUESTRO GUSTO pino se lo quitamos  pos = fin;
+                    }
+                    
+                }
+            }else{
+                alert("error en el canvas");
+            }
+        }
+    }    
+    </script>
+</head>
+<body>
+    <h1>Manejo de linea </h1>
+    <p>clickea y arrastra</p>
+    <canvas id="canvas1" width="300px" height="300px">Tu navegador tiene canvas</canvas>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas Arcos</title>
+  <style media="screen">
+    #canvas1{
+      border: dotted 3px yellow;
+      background:green;
+    }
+  </style>
+  <script>
+    /*cuando termines de cargar la pagina modificalo*/
+    window.onload= function(){
+      var canvas = document.getElementById("canvas1");
+      if(canvas && canvas.getContext){
+        var ctx = canvas.getContext("2d");
+        if(ctx){
+          ctx.fillStyle = "rgb(255, 255, 255)";
+          ctx.strokeStyle = "rgb(205, 10, 177)";
+          ctx.lineWidth = 10;
+
+
+
+          ctx.beginPath();
+          ctx.arc(100,250,50,1.1*Math.PI, 1.9*Math.PI);
+          ctx.stroke();
+
+
+          //Arco inverso
+          ctx.beginPath();
+          ctx.arc(250,250,50,1.1*Math.PI, 1.9*Math.PI, true);
+          ctx.stroke();
+
+
+          //Circulo completo
+          ctx.fillStyle = "rgb(255, 255, 255)";
+          ctx.strokeStyle = "rgb(255, 230, 0)";
+          ctx.beginPath();
+          ctx.arc(400,250,50,0, 2*Math.PI);
+          ctx.stroke();
+        }else{
+          alert("Error al crear el contexto");
+        }
+      }
+    };
+  </script>
+</head>
+<body>
+  <!--canvas es algo invisible el cual se puede manupulas con js donde puedes dibujar
+cualquier poligono-->
+  <h2>Canvas usando arcos</h2>
+  <canvas id="canvas1" width="500" height="500">Tu navegador no soporta canvas</canvas>
+</body>
+</html>

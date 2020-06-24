@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas en eventos de linea</title>
+    <style>
+    #canvas1{
+        background-color: rgb(58, 62, 62,.3);
+        border: 1px solid black;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas1");
+
+        if(canvas && canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            if(ctx){
+              var gradiente = ctx.createLinearGradient(0,0, canvas.width, canvas.height);
+              gradiente.addColorStop(0,"green");
+              gradiente.addColorStop(.30,"green");
+              gradiente.addColorStop(.40,"white");
+              gradiente.addColorStop(.58,"white");
+              gradiente.addColorStop(.70,"red");
+              gradiente.addColorStop(1,"red");
+
+
+              ctx.font = "normal bold 6em Verdana";
+              ctx.lineWitdh = 1.0;
+              ctx.fillStyle = gradiente; // lleno en adetro
+              ctx.strokeStyle = "rgb(0, 209, 255)"; // relleno de contorno tambien le podemos poner gradiente de letra
+              //Definimos el contexto
+              ctx.shadowColor = "black"; // contorno
+              ctx.shadowOffsetX = 1; // en x
+              ctx.shadowOffsetY =15; // en y
+              ctx.shadowBlur = 45; // blur en el contorno de desvanecimiento
+
+
+              //PARA ALINEAR EL contexto
+              ctx.textAlign = "center";
+              var cx = canvas.width/2;
+              var cy = canvas.height/2;
+
+              // TEXTO QUE LLEVA EL CUADRO
+              ctx.fillText("VARIABLE",cx,cy); //relleno
+              ctx.strokeText("VARIABLE",cx,cy); //contorno
+
+
+
+            }
+    }
+  }
+    </script>
+</head>
+<body>
+    <h1>Manejo de texto usando gradiente </h1>
+    <canvas id="canvas1" width="800px" height="300px">Tu navegador tiene canvas</canvas>
+</body>
+</html>

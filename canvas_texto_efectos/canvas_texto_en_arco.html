@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas en eventos de linea</title>
+    <style>
+    #canvas1{
+        background-color: rgb(58, 62, 62,.3);
+        border: 1px solid black;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas1");
+
+        if(canvas && canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            if(ctx){
+              var cx = canvas.width/2;
+              var cy = canvas.height/2;
+              // MODIFICAR EL ANGULO ES IMPORTANTE
+              var angulo = Math.PI*1.5;
+              var radio = 100;
+              var cadena = "Esto es una cadena que ira en forma de circulo...";
+              var len = cadena.length;
+              var a = "";
+              ctx.font="22px Calibri";
+              ctx.textAlign="center";
+              ctx.fillStyle = "rgb(18, 18, 20)";
+              ctx.fillStroke = "white";
+
+              ctx.save();
+              ctx.translate(cx,cy);
+              // ROTACION DE LAS LETRAS
+              ctx.rotate(-1*angulo/2);
+              ctx.rotate(angulo/len);
+
+              for(var i = 0; i<len; i++){
+                ctx.rotate(angulo/len);
+                ctx.save();
+                ctx.translate(0, -1*radio);
+                s = cadena[i];
+                ctx.fillText(s,0,0);
+                ctx.restore();
+              }
+              ctx.restore();
+
+            }
+    }
+  }
+    </script>
+</head>
+<body>
+    <h1>Manejo de texto usando angulos </h1>
+    <canvas id="canvas1" width="800px" height="300px">Tu navegador tiene canvas</canvas>
+</body>
+</html>

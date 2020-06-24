@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas Arcos</title>
+  <style media="screen">
+    #canvas1{
+      border: dotted 3px yellow;
+      background:rgb(0, 50, 22);
+    }
+  </style>
+  <script>
+    /*cuando termines de cargar la pagina modificalo*/
+    window.onload= function(){
+      var canvas = document.getElementById("canvas1");
+      if(canvas && canvas.getContext){
+        var ctx = canvas.getContext("2d");
+        if(ctx){
+          //Configuracion
+          ctx.lineWidth=10;
+          ctx.strokeStyle="red";
+          ctx.fillStyle="yellow";
+
+
+          //Curva bezzier
+          ctx.beginPath();
+          ctx.moveTo(50,200);
+          ctx.bezierCurveTo(50,100,200,100,200,150);
+          ctx.stroke();
+//Punto inicial
+          ctx.fillRect(50,200,5,5);
+//Primer punto
+          ctx.fillRect(50,100,5,5);
+//Segundo punto
+          ctx.fillRect(200,100,5,5);
+//Punto final
+          ctx.fillRect(200,150,5,5);
+
+
+
+          ///Curvas Cuadraticas
+          ctx.beginPath();
+          ctx.moveTo(300,200);
+          ctx.quadraticCurveTo(400,100,500,150);
+          ctx.stroke();
+          //Punto inicial
+          ctx.fillRect(300,200,5,5);
+          //Primer punto ancla
+          ctx.fillRect(400,100,5,5);
+          //Punto final
+          ctx.fillRect(500,150,5,5);
+
+
+        }else{
+          alert("Error al crear el contexto");
+        }
+      }
+    };
+  </script>
+</head>
+<body>
+  <!--canvas es algo invisible el cual se puede manupulas con js donde puedes dibujar
+cualquier poligono-->
+  <h2>Canvas usando curvas bezier y cuadraticas</h2>
+  <canvas id="canvas1" width="500" height="500">Tu navegador no soporta canvas</canvas>
+</body>
+</html>

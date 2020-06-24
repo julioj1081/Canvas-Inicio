@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas en eventos de linea</title>
+    <style>
+    #canvas1{
+        background-color: bisque;
+        border: 1px solid black;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas1");
+        var bandera = false;
+        if(canvas && canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            var pos = {};
+            //COLORES
+            var colorSelect = document.getElementById("color");
+            var lineaSelect = document.getElementById("linea");
+            var borrar = document.getElementById("borrar");
+            if(ctx){
+                function ajusta(xx,yy){
+                    var posCanvas = canvas.getBoundingClientRect();
+                    var x = xx - posCanvas.left;
+                    var y = yy - posCanvas.top;
+                    return {x:x, y:y}
+                }
+                function dibuja(inicio, fin){
+                    ctx.beginPath();
+                    ctx.moveTo(inicio.x, inicio.y);
+                    ctx.lineTo(fin.x, fin.y);
+                    ctx.stroke();
+                }
+                /*FUNCIONES DE SELECTORES*/
+                borrar.onclick = function(e){
+                    ctx.clearRect(0,0, canvas.width, canvas.height);
+                }
+                colorSelect.onchange = function(){
+                    ctx.strokeStyle = colorSelect.value;
+                }
+                lineaSelect.onchange = function(){
+                    ctx.lineWidth = lineaSelect.value;
+                }
+                
+                canvas.onmousedown = function(e){
+                    pos = ajusta(e.clientX, e.clientY);
+                    bandera = true;
+                }
+                canvas.onmouseup = function(e){
+                    bandera = false;
+                }
+                canvas.onmousemove = function(e){
+                    if(bandera){
+                        var fin = ajusta(e.clientX, e.clientY);
+                        dibuja(pos, fin);
+                        
+                        //SI QUEREMOS DIBUJAR A NUESTRO GUSTO pino se lo quitamos 
+                         pos = fin;
+                    }
+                    
+                }
+                //VALORES INICIALES
+                ctx.strokeStyle = colorSelect.value;
+                ctx.lineaWidth = lineaSelect.value;
+            }else{
+                alert("error en el canvas");
+            }
+        }
+    }    
+    </script>
+</head>
+<body>
+    <h1>Manejo de linea </h1>
+    <p>clickea y arrastra</p>
+    <canvas id="canvas1" width="300px" height="300px">Tu navegador tiene canvas</canvas>
+    <div>
+        Color de linea:
+        <select id="color">
+            <option value="yellow">Amarillo</option>
+            <option value="red">Rojo</option>
+            <option value="blue">Azul</option>
+            <option value="white">Blanco</option>
+        </select>
+        Grosor de Linea:
+        <select id="linea">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <input id="borrar" type="button"  value="borra todo">
+</div>
+</body>
+</html>

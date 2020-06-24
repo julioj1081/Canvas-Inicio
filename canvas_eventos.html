@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas en eventos</title>
+    <style>
+    #canvas1{
+        background-color: bisque;
+        border: 1px solid black;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas1");
+        if(canvas && canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            if(ctx){
+                /*
+                al clickear
+                canvas.onmousedown = function(e){
+                    var x = e.clientX;
+                    var y = e.clientY;
+                    alert(x+" "+y);
+                }*/
+                //Al mover el mouse
+                /*canvas.onmousemove = function(e){
+                    var x = e.clientX;
+                    var y = e.clientY;
+                    alert(x+" "+y);
+                }*/
+                canvas.onmousedown = function(e){
+                    var posCanvas = canvas.getBoundingClientRect();
+
+                    var x = e.clientX - posCanvas.left;
+                    var y = e.clientY - posCanvas.top;
+                    //alert(x+" "+y);
+                    alert("iz"+posCanvas.left+"\n"+"der"+posCanvas.right+"\n"+"top"+posCanvas.top+"\n"+"down"+posCanvas.bottom+"\n"+"witdh"+canvas.width+"\n"+"height"+canvas.height+"\n"+"x "+x+"\n"+"Y "+y);
+                }
+            }else{
+                alert("error en el canvas");
+            }
+        }
+    }    
+    </script>
+</head>
+<body>
+    <h1>Manejo de eventos </h1>
+    <canvas id="canvas1" width="300px" height="300px">Tu navegador tiene canvas</canvas>
+</body>
+</html>

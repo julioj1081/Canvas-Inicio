@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas</title>
+  <style media="screen">
+    #canvas1{
+      border: dotted 3px yellow;
+      background:green;
+    }
+  </style>
+  <script>
+    /*cuando termines de cargar la pagina modificalo*/
+    window.onload= function(){
+      var canvas = document.getElementById("canvas1");
+      if(canvas && canvas.getContext){
+        var ctx = canvas.getContext("2d");
+        if(ctx){
+          ctx.lineWidth = 10;
+          ctx.strokeStyle ="rgb(10, 88, 103)";
+          ctx.fillStyle = "rgb(103, 16, 222)";
+
+          ctx.fillRect(50,50,100,100);
+          ctx.strokeRect(50,50,100,100);
+
+
+          //SALVANDO LA CONFIGURACION
+          ctx.save();
+
+
+          //  CAMBIAR LA CONFIGURACION
+          ctx.strokeStyle = "black";
+          ctx.fillStyle = "white";
+
+          // SEGUNDO DIBUJO
+          ctx.fillRect(200,50,100,100);
+          ctx.strokeRect(200,50,100,100);
+          //RESTAURAR ARCHIVO
+          ctx.restore();
+
+
+
+          // TERCER DIBUJO con las propiedades del cuado 1 o dibujo 1
+          ctx.fillRect(350,50,100,100);
+          ctx.strokeRect(350,50,100,100);
+        }else{
+          alert("Error al crear el contexto");
+        }
+      }
+    };
+  </script>
+</head>
+<body>
+  <!--canvas es algo invisible el cual se puede manupulas con js donde puedes dibujar
+cualquier poligono-->
+  <h2>Estado de canvas SAVE/RESTAURAR</h2>
+  <p>nos permite guardar los colores de una imagen para despues plasmarlas en otra figura con otra posicion usando save() y restore()</p>
+  <canvas id="canvas1" width="500" height="500">Tu navegador no soporta canvas</canvas>
+</body>
+</html>
